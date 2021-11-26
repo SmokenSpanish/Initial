@@ -9,13 +9,14 @@
 <script>
 import MyComponent from './components/MyComponent';
 import Counter from './components/Counter';
-import profileCard from './components/profileCard';
+import ProfileCard from './components/ProfileCard';
 
 export default {
   name: 'App',
   components: {
     MyComponent,
-    Counter
+    Counter,
+    ProfileCard
   }
 }
 </script>
