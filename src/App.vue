@@ -3,6 +3,7 @@
 <MyComponent/>
 <Counter/>
 <ProfileCard/>
+<Finder/>
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import MyComponent from './components/MyComponent';
 import Counter from './components/Counter';
 import ProfileCard from './components/ProfileCard';
+import Finder from './components/Finder';
 
 export default {
   name: 'App',
   components: {
     MyComponent,
     Counter,
-    ProfileCard
+    ProfileCard,
+    Finder
   }
 }
 </script>
@@ -29,10 +32,10 @@ export default {
     color: #2c3e50;
     margin-top: 60px;
 
-  body {
-    margin: 0;
-  }
-  
+body {
+  margin: 0;
+}
+
   }
 
 </style>

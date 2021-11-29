@@ -8,7 +8,7 @@
       />
       <div class="info">
         <h2>
-            {{ getFullNameAuthor }}
+          {{ getFullNameAuthor }}
         </h2>
         <strong>Бизнес-коуч</strong>
         <ul>
@@ -21,12 +21,16 @@
         </ul>
       </div>
     </div>
-    <p>Участников: 0</p>
+    <p>Участников: {{ users.length }}</p>
     <ul>
-        <li v-for="{users, index} in users" :key="index">
-        {{ getFullNameUser(users) }}
-        </li>
+      <li v-for="(user, index) in users" :key="index">
+        {{ `${index + 1} ${getFullName(user)}` }}
+      </li>
     </ul>
+   <button type="button" @click="currentPage--">пред.</button>
+   <button v-for="page in pages" :key="page" type="button" @click="currentPage = page">{{ page }}</button>
+   <button type="button" @click="currentPage++">след.</button>
+    <p>Cтраница {{ currentPage }} из {{ pages }}</p>
   </div>
 </template>
 
@@ -39,23 +43,25 @@ export default {
       secondName: 'Иларионович',
       lastName: 'Богатов',
       users: [
-          {
-            firstName: 'Иван',
-            secondName: 'Иванович',
-            lastName: 'Иванов'
-          },
-          {
-            firstName: 'Иван',
-            secondName: 'Иванович',
-            lastName: 'Иванов'
-          },
-          {
-            firstName: 'Иван',
-            secondName: 'Иванович',
-            lastName: 'Иванов'
-          },
-      ]
-    };
+        {
+          firstName: 'Игнатий',
+          secondName: 'Иларионович',
+          lastName: 'Богатов'
+        },
+        {
+          firstName: 'Игнатий',
+          secondName: 'Иларионович',
+          lastName: 'Богатов'
+        },
+        {
+          firstName: 'Игнатий',
+          secondName: 'Иларионович',
+          lastName: 'Богатов'
+        }
+      ],
+      pages: 3,
+      currentPage: 1
+   }
   },
   computed: {
     getFullNameAuthor() {
@@ -63,11 +69,26 @@ export default {
     }
   },
   methods: {
-      getFullNameUser(user) {
-          return user.secondName
+      getFullName(user) {
+          return `${user.firstName} ${user.secondName} ${user.lastName}`
+      },
+      loadUsers(page) {
+        if(this.currentPage > 3) {
+          this.currentPage = 1
+        } else if(this.currentPage < 1) {
+          this.currentPage = 3
+        }
+
+        console.log(`Загрузка пользователя: страница ${page}`)
       }
+        
+  },
+  watch: {
+    currentPage(page) {
+      this.loadUsers(page)
+    }
   }
-};
+}
 </script>
 
 <style>
@@ -83,12 +104,15 @@ export default {
 }
 
 ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .main-info {
-    display: flex;
-    line-height: 2.1em;
+  display: flex;
+  line-height: 2.1em;
+}
+button{
+  width: 40px;
 }
 </style>
